@@ -5,6 +5,13 @@
  * https://github.com/pantheon-systems/WordPress/blob/master/wp-config.php
  */
 
+/** Production */
+ini_set('display_errors', 0);
+define('WP_DEBUG_DISPLAY', false);
+define('SCRIPT_DEBUG', false);
+/** Disable all file modifications including updates and update notifications */
+define('DISALLOW_FILE_MODS', true);
+
 // ** MySQL settings - included in the Pantheon Environment ** //
 /** The name of the database for WordPress */
 define('DB_NAME', $_ENV['DB_NAME']);
@@ -50,7 +57,7 @@ if (isset($_SERVER['HTTP_HOST'])) {
         $scheme = 'https';
     }
     define('WP_HOME', $scheme . '://' . $_SERVER['HTTP_HOST']);
-    define('WP_SITEURL', $scheme . '://' . $_SERVER['HTTP_HOST']);
+    define('WP_SITEURL', $scheme . '://' . $_SERVER['HTTP_HOST'] . '/wp');
 }
 // Don't show deprecations; useful under PHP 5.5
 error_reporting(E_ALL ^ E_DEPRECATED);
