@@ -24,7 +24,13 @@ if (file_exists($root_dir . '/.env')) {
  * Set up our global environment constant and load its config first
  * Default: production
  */
-define('WP_ENV', env('WP_ENV') ?: 'production');
+if (isset($_ENV['PANTHEON_ENVIRONMENT'])) {
+  define('WP_ENV', 'pantheon');
+}
+else {
+  define('WP_ENV', env('WP_ENV') ?: 'production');
+}
+
 
 $env_config = __DIR__ . '/environments/' . WP_ENV . '.php';
 
